@@ -1,0 +1,60 @@
+{
+  "name": "Sunrise Family Clinic",
+  "phone": "+91 93706 75332",
+  "wa": "919370675332",
+  "address": "12 Main Road, Your City",
+  "note": "Sample website design.",
+  "hours": [
+    {
+      "d": "Monday to Friday",
+      "t": "9 am to 8 pm"
+    },
+    {
+      "d": "Saturday",
+      "t": "9 am to 2 pm"
+    },
+    {
+      "d": "Sunday",
+      "t": "Emergency only"
+    }
+  ],
+  "services": [
+    {
+      "n": "General consultation",
+      "d": "Fever, infections, blood pressure, diabetes care and preventive health checks.",
+      "p": "₹500"
+    },
+    {
+      "n": "Child health",
+      "d": "Growth monitoring, vaccinations and treatment of common childhood illnesses.",
+      "p": "₹600"
+    },
+    {
+      "n": "Dermatology",
+      "d": "Diagnosis and treatment of skin, hair and allergy conditions.",
+      "p": "₹700"
+    },
+    {
+      "n": "Pathology and blood tests",
+      "d": "Home sample collection available. Reports within 24 hours.",
+      "p": "From ₹300"
+    }
+  ],
+  "doctors": [
+    {
+      "n": "Dr. Anita Sharma",
+      "q": "MBBS, MD (Medicine)",
+      "d": "General physician with 14 years of clinical experience."
+    },
+    {
+      "n": "Dr. Rahul Kulkarni",
+      "q": "MBBS, MD (Pediatrics)",
+      "d": "Pediatrician with 10 years of experience in child care."
+    },
+    {
+      "n": "Dr. Meera Patil",
+      "q": "MBBS, MD (Dermatology)",
+      "d": "Dermatologist with 8 years of experience."
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sunrise Family Clinic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffffff;--soft:#f3f6f9;--ink:#1b2733;--muted:#566677;--line:#dbe3ea;--navy:#0f2a43;--accent:#1d5c8f;--on-navy:#ffffff;--on-navy-muted:#b9c9d8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a26;--soft:#13222f;--ink:#e8eef4;--muted:#9fb0c0;--line:#25384a;--navy:#0a1621;--accent:#6fb1e4;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1a26;--soft:#13222f;--ink:#e8eef4;--muted:#9fb0c0;--line:#25384a;--navy:#0a1621;--accent:#6fb1e4;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 "Source Sans 3",system-ui,sans-serif}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;font-weight:600;line-height:1.2;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.top{background:var(--navy);color:var(--on-navy-muted);font-size:14px;padding:8px 0}
+.top .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.top a{text-decoration:none;color:var(--on-navy)}
+header{border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:18px}
+.brand{font:600 22px "Source Serif 4",Georgia,serif;text-decoration:none;color:var(--ink)}
+nav a{margin-left:26px;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px}
+nav a:hover{color:var(--ink)}
+.hero{background:var(--navy);color:var(--on-navy)}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:center;padding-top:72px;padding-bottom:72px}
+.hero h1{font-size:clamp(32px,5vw,50px);letter-spacing:-.01em}
+.hero p{color:var(--on-navy-muted);max-width:50ch;margin:20px 0 28px;font-size:18px}
+.btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:4px;padding:13px 24px;font:600 16px "Source Sans 3",sans-serif;text-decoration:none;cursor:pointer}
+.hero .btn{background:#fff;color:var(--navy)}
+.hero .btn.ghost{background:transparent;color:#fff;border:1px solid #4a6580;margin-left:10px}
+.book{background:var(--bg);color:var(--ink);border-radius:6px;padding:28px}
+.book h2{font-size:22px;margin-bottom:4px}
+.book small{color:var(--muted)}
+.book label{display:block;font-weight:600;font-size:14px;margin:16px 0 6px}
+.book input,.book select{width:100%;padding:11px 12px;border-radius:4px;border:1px solid var(--line);background:var(--soft);color:var(--ink);font:inherit}
+.book .btn{width:100%;margin-top:22px}
+.strip{background:var(--soft);border-bottom:1px solid var(--line)}
+.strip .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 32px;padding-top:20px;padding-bottom:20px;font-weight:600;font-size:15px;color:var(--muted)}
+section{padding:68px 0}
+section+section{border-top:1px solid var(--line)}
+section h2{font-size:clamp(26px,3.5vw,34px);margin-bottom:8px}
+.lead{color:var(--muted);margin:0 0 32px;max-width:60ch}
+.row{display:grid;grid-template-columns:220px 1fr auto;gap:24px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.row:first-of-type{border-top:1px solid var(--line)}
+.row h3{font-size:19px}.row p{margin:0;color:var(--muted)}
+.row b{font-weight:600;color:var(--accent);white-space:nowrap}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;border:1px solid var(--line)}
+.doc{padding:26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0}
+.doc h3{font-size:20px}.doc .q{color:var(--accent);font-weight:600;font-size:15px;margin:4px 0 8px}
+.doc p{margin:0;color:var(--muted);font-size:16px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.hours{width:100%;border-collapse:collapse}
+.hours td{padding:11px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right;color:var(--muted)}
+footer{background:var(--navy);color:var(--on-navy-muted);padding:30px 0;font-size:14px}
+@media (max-width:780px){.hero .wrap,.info{grid-template-columns:1fr;gap:36px}.row{grid-template-columns:1fr;gap:4px}nav a:not(:last-child){display:none}.hero .btn.ghost{margin:10px 0 0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><span id="topNote"></span><a class="js-tel js-phone" href="#"></a></div></div>
+<header><div class="wrap">
+  <a class="brand js-name" href="#"></a>
+  <nav><a href="#services">Services</a><a href="#doctors">Doctors</a><a href="#visit">Visit us</a></nav>
+</div></header>
+
+<main>
+<div class="hero"><div class="wrap">
+  <div>
+    <h1>Trusted primary care for you and your family.</h1>
+    <p>Experienced doctors, clear explanations and modern diagnostics, all under one roof. Request an appointment online and we will confirm your slot on WhatsApp.</p>
+    <a class="btn" href="#book">Book an appointment</a><a class="btn ghost js-tel" href="#">Call the clinic</a>
+  </div>
+  <form class="book" id="book" onsubmit="return false">
+    <h2>Request an appointment</h2>
+    <small>We reply within working hours.</small>
+    <label for="n">Full name</label>
+    <input id="n" autocomplete="name">
+    <label for="s">Service</label>
+    <select id="s"></select>
+    <label for="d">Preferred date</label>
+    <input id="d" type="date">
+    <a class="btn" id="go" href="https://wa.me/919370675332" target="_blank" rel="noopener noreferrer" style="display:block;text-align:center">Send request on WhatsApp</a>
+  </form>
+</div></div>
+
+<div class="strip"><div class="wrap"><span>Registered, qualified doctors</span><span>In-house diagnostic lab</span><span>Reports delivered to your phone</span><span>Same-day appointments</span></div></div>
+
+<div class="wrap">
+<section id="services">
+  <h2>Our services</h2>
+  <p class="lead">Consultation fees are shown below. Tests are priced separately.</p>
+  <div id="svc"></div>
+</section>
+
+<section id="doctors">
+  <h2>Our doctors</h2>
+  <p class="lead">Each patient is seen by a specialist with the training to match their needs.</p>
+  <div class="docs" id="docs"></div>
+</section>
+
+<section id="visit">
+  <h2>Visit the clinic</h2>
+  <div class="info">
+    <div>
+      <p><b class="js-name"></b><br><span id="addr"></span><br>Phone: <span class="js-phone"></span></p>
+      <p>Walk-ins are welcome. Booking in advance reduces your waiting time.</p>
+      <a class="btn" href="#book">Book an appointment</a>
+    </div>
+    <table class="hours" aria-label="Opening hours"><tbody id="hrs"></tbody></table>
+  </div>
+</section>
+</div>
+</main>
+<footer><div class="wrap">© <span class="js-name"></span>. <span id="note"></span></div></footer>
+
+<script>
+var D={"name": "Sunrise Family Clinic", "phone": "+91 93706 75332", "wa": "919370675332", "address": "12 Main Road, Your City", "note": "Sample website design.", "hours": [{"d": "Monday to Friday", "t": "9 am to 8 pm"}, {"d": "Saturday", "t": "9 am to 2 pm"}, {"d": "Sunday", "t": "Emergency only"}], "services": [{"n": "General consultation", "d": "Fever, infections, blood pressure, diabetes care and preventive health checks.", "p": "₹500"}, {"n": "Child health", "d": "Growth monitoring, vaccinations and treatment of common childhood illnesses.", "p": "₹600"}, {"n": "Dermatology", "d": "Diagnosis and treatment of skin, hair and allergy conditions.", "p": "₹700"}, {"n": "Pathology and blood tests", "d": "Home sample collection available. Reports within 24 hours.", "p": "From ₹300"}], "doctors": [{"n": "Dr. Anita Sharma", "q": "MBBS, MD (Medicine)", "d": "General physician with 14 years of clinical experience."}, {"n": "Dr. Rahul Kulkarni", "q": "MBBS, MD (Pediatrics)", "d": "Pediatrician with 10 years of experience in child care."}, {"n": "Dr. Meera Patil", "q": "MBBS, MD (Dermatology)", "d": "Dermatologist with 8 years of experience."}]};
+function $(i){return document.getElementById(i)}
+function E(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function all(q,f){Array.prototype.forEach.call(document.querySelectorAll(q),f)}
+function render(){
+document.title=D.name;
+all('.js-name',function(e){e.textContent=D.name});
+all('.js-phone',function(e){e.textContent=D.phone});
+all('.js-tel',function(e){e.href='tel:+'+D.wa});
+$('addr').textContent=D.address;$('note').textContent=D.note||'';
+$('topNote').textContent=D.hours[0]?D.hours[0].d+': '+D.hours[0].t:'';
+$('svc').innerHTML=D.services.map(function(s){return '<div class="row"><h3>'+E(s.n)+'</h3><p>'+E(s.d)+'</p><b>'+E(s.p)+'</b></div>'}).join('');
+$('docs').innerHTML=D.doctors.map(function(d){return '<div class="doc"><h3>'+E(d.n)+'</h3><div class="q">'+E(d.q)+'</div><p>'+E(d.d)+'</p></div>'}).join('');
+$('hrs').innerHTML=D.hours.map(function(x){return '<tr><td>'+E(x.d)+'</td><td>'+E(x.t)+'</td></tr>'}).join('');
+$('s').innerHTML=D.services.map(function(s){return '<option>'+E(s.n)+'</option>'}).join('');
+$('go').href='https://wa.me/'+D.wa;}
+render();
+fetch('content.json?'+Date.now()).then(function(r){return r.ok?r.json():null}).then(function(j){if(j){D=j;render()}}).catch(function(){});
+</script>
+<script>
+document.getElementById('go').addEventListener('click',function(){
+  var n=document.getElementById('n').value.trim()||'a patient';
+  var s=document.getElementById('s').value;
+  var d=document.getElementById('d').value;
+  var msg='Hello, I’m '+n+'. I would like to book: '+s+(d?' on '+d:'')+'.';
+  this.href='https://wa.me/'+D.wa+'?text='+encodeURIComponent(msg);
+});
+</script>
+</body>
+</html>

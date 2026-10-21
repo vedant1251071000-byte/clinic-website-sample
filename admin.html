@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Website admin</title>
+<style>
+:root{color-scheme:light dark;--line:#8886;--accent:#1d5c8f}
+body{font:16px/1.5 system-ui,sans-serif;margin:0;background:Canvas;color:CanvasText}
+.w{max-width:760px;margin:0 auto;padding:24px 20px 80px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:19px;margin:32px 0 10px}
+.m{opacity:.7;font-size:14px}
+.card,.item{border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:10px}
+.item{display:grid;gap:8px}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+input{width:100%;padding:10px;border:1px solid var(--line);border-radius:4px;font:inherit;background:Field;color:FieldText}
+button{background:var(--accent);color:#fff;border:0;border-radius:4px;padding:11px 18px;font:600 15px system-ui;cursor:pointer}
+button.g{background:transparent;color:inherit;border:1px solid var(--line)}
+#msg{font-weight:600;min-height:24px}
+</style></head><body><div class="w">
+<h1>Website admin</h1><p class="m">Edit the clinic’s details and publish them to the website.</p>
+<div id="login" class="card">
+<label for="repo">GitHub repository</label><input id="repo" placeholder="username/repository-name">
+<label for="tok">Access token</label><input id="tok" type="password" autocomplete="off" placeholder="Paste the token you were given">
+<p class="m">The token stays in this browser only. Without it, nobody can change the website.</p>
+<button id="conn">Connect</button></div>
+<p id="msg" role="status"></p>
+<div id="ed" hidden>
+<h2>Clinic details</h2><div class="card">
+<label>Clinic name</label><input data-top="name">
+<label>Phone number shown on the site</label><input data-top="phone" placeholder="+91 98765 43210">
+<label>WhatsApp number for bookings (country code, digits only)</label><input data-top="wa" placeholder="919876543210">
+<label>Address</label><input data-top="address">
+<label>Footer note (optional)</label><input data-top="note"></div>
+<h2>Opening hours</h2><div id="hours"></div><button class="g" data-add="hours">Add row</button>
+<h2>Services</h2><div id="services"></div><button class="g" data-add="services">Add service</button>
+<h2>Doctors</h2><div id="doctors"></div><button class="g" data-add="doctors">Add doctor</button>
+<p style="margin-top:32px"><button id="save">Publish changes</button> <button class="g" id="out">Log out</button></p>
+</div></div>
+<script>
+var $=function(i){return document.getElementById(i)},S={};
+var F={hours:[['d','Day'],['t','Time']],services:[['n','Service name'],['d','Description'],['p','Price']],doctors:[['n','Name'],['q','Qualification'],['d','Description']]};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function msg(t,bad){var m=$('msg');m.textContent=t;m.style.color=bad?'#c0392b':'inherit'}
+function gh(o){o=o||{};o.headers={Authorization:'Bearer '+S.token,Accept:'application/vnd.github+json','Content-Type':'application/json'};return fetch('https://api.github.com/repos/'+S.repo+'/contents/content.json',o)}
+function draw(k){var h='';S.data[k].forEach(function(it,i){h+='<div class="item">';F[k].forEach(function(f){h+='<input data-k="'+k+'" data-i="'+i+'" data-f="'+f[0]+'" placeholder="'+f[1]+'" aria-label="'+f[1]+'" value="'+esc(it[f[0]])+'">'});h+='<button class="g" data-del="'+k+'" data-i="'+i+'">Remove</button></div>'});$(k).innerHTML=h}
+function show(){$('login').hidden=true;$('ed').hidden=false;document.querySelectorAll('[data-top]').forEach(function(i){i.value=S.data[i.dataset.top]||''});['hours','services','doctors'].forEach(draw)}
+document.addEventListener('input',function(e){var t=e.target.dataset;if(t.top)S.data[t.top]=e.target.value;else if(t.k)S.data[t.k][t.i][t.f]=e.target.value});
+document.addEventListener('click',function(e){var t=e.target.dataset;if(t.add){var o={};F[t.add].forEach(function(f){o[f[0]]=''});S.data[t.add].push(o);draw(t.add)}if(t.del){S.data[t.del].splice(+t.i,1);draw(t.del)}});
+$('conn').onclick=function(){S.repo=$('repo').value.trim();S.token=$('tok').value.trim();msg('Connecting…');
+gh().then(function(r){if(!r.ok)throw new Error(r.status==401?'The token is wrong or expired':'Could not open content.json in that repository (error '+r.status+')');return r.json()}).then(function(j){S.sha=j.sha;S.data=JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,'')))));try{localStorage.setItem('cms',JSON.stringify({repo:S.repo,token:S.token}))}catch(e){}msg('');show()}).catch(function(e){msg(e.message,1)})};
+$('save').onclick=function(){S.data.wa=String(S.data.wa).replace(/\D/g,'');document.querySelector('[data-top=wa]').value=S.data.wa;
+var b={message:'Update website content',content:btoa(unescape(encodeURIComponent(JSON.stringify(S.data,null,2)))),sha:S.sha};msg('Publishing…');
+gh({method:'PUT',body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.message||('error '+r.status));S.sha=j.content.sha;msg('Published. The website will show the changes in about a minute.')})}).catch(function(e){msg('Could not publish: '+e.message,1)})};
+$('out').onclick=function(){try{localStorage.removeItem('cms')}catch(e){}location.reload()};
+try{var c=JSON.parse(localStorage.getItem('cms')||'{}');$('repo').value=c.repo||'';$('tok').value=c.token||''}catch(e){}
+</script></body></html>
